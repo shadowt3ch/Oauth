@@ -165,9 +165,9 @@ def home():
                     <a href="#">Support</a>
                 </div>
             </div>
-            <a href="login.html">Login</a>
+            <a href="/login">Login</a>
             <a href="#">Invite</a>
-            <a href="#">Discord</a>
+            <a href="https://discord.gg/CV8FMgcrJZ">Discord</a>
         </nav>
     </header>
 
@@ -280,7 +280,7 @@ def admin():
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
-        <a href="index.html" class="back-btn">Back to Home</a>
+        <a href="/" class="back-btn">Back to Home</a>
     </div>
 
 </body>
@@ -368,7 +368,7 @@ def login():
         <a href="https://discord.com/oauth2/authorize?client_id=1345207651503702086&redirect_uri=https%3A%2F%2Fbvmdph6r-8080.usw3.devtunnels.ms%2Fcallback&response_type=code&scope=identify" class="discord-btn">
             <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord"> Login with Discord
         </a>                
-        <a href="index.html" class="back-btn" id="back-btn">Back to Home</a>
+        <a href="/" class="back-btn" id="back-btn">Back to Home</a>
     </div>
 
     <script>
