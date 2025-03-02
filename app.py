@@ -165,7 +165,6 @@ def home():
                     <a href="#">Support</a>
                 </div>
             </div>
-            <a href="/login">Login</a>
             <a href="#">Invite</a>
             <a href="https://discord.gg/CV8FMgcrJZ">Discord</a>
         </nav>
@@ -193,100 +192,6 @@ def home():
 </html>
     ''')
 
-@app.route('/admin')
-def admin():
-    return render_template_string('''
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AuthCord - Admin Login</title>
-    <style>
-        body {
-            background: #0a0a0a;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
-
-        .admin-container {
-            text-align: center;
-            padding: 40px;
-            background: rgba(0, 0, 0, 0.9);
-            box-shadow: 0 0 10px cyan;
-            border-radius: 10px;
-            max-width: 90%;
-        }
-
-        h2 {
-            font-size: 32px;
-            text-shadow: 0 0 10px cyan;
-        }
-
-        .admin-form input {
-            padding: 10px;
-            margin: 10px 0;
-            width: 100%;
-            border-radius: 5px;
-            border: none;
-            outline: none;
-            box-shadow: 0 0 10px cyan;
-            background: #333;
-            color: white;
-            font-size: 16px;
-        }
-
-        .admin-form button {
-            background: cyan;
-            color: white;
-            padding: 12px 15px;
-            border-radius: 5px;
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            box-shadow: 0 0 10px cyan;
-        }
-
-        .back-btn {
-            margin-top: 20px;
-            background: gray;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-size: 16px;
-            text-decoration: none;
-            box-shadow: 0 0 10px cyan;
-            max-width: 100%;
-            display: block;
-        }
-
-    </style>
-</head>
-<body>
-
-    <div class="admin-container">
-        <h2>Admin Login</h2>
-        <form class="admin-form" action="admin_dashboard.html" method="post">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <a href="/" class="back-btn">Back to Home</a>
-    </div>
-
-</body>
-</html>
-    ''')
-
 @app.route('/login')
 def login():
     return render_template_string('''
@@ -295,7 +200,7 @@ def login():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AuthCord - Login</title>
+    <title>AuthCord - Admin Panel</title>
     <style>
         body {
             background: #0a0a0a;
@@ -311,72 +216,112 @@ def login():
             overflow-x: hidden;
         }
 
-        .login-container {
-            text-align: center;
-            padding: 40px;
-            background: rgba(0, 0, 0, 0.9);
-            box-shadow: 0 0 10px cyan;
-            border-radius: 10px;
-            max-width: 90%;
+        .admin-panel {
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 20px cyan;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
         }
 
         h2 {
-            font-size: 32px;
-            text-shadow: 0 0 10px cyan;
+            font-size: 36px;
+            text-shadow: 0 0 15px cyan;
+            margin-bottom: 20px;
         }
 
-        .discord-btn {
-            background: #5865F2;
+        .button {
+            background: linear-gradient(45deg, cyan, #4dd2ff);
             color: white;
-            padding: 12px 15px;
-            border-radius: 5px;
-            font-size: 18px;
-            text-decoration: none;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            box-shadow: 0 0 10px #5865F2;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 20px;
+            border: none;
             cursor: pointer;
-            max-width: 100%;
+            width: 100%;
+            margin: 10px 0;
+            box-shadow: 0 0 15px cyan;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .discord-btn img {
-            width: 24px;
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px cyan;
         }
 
-        .back-btn {
-            margin-top: 20px;
-            display: none;
-            background: gray;
+        .user-list {
+            margin: 20px 0;
+            max-height: 200px;
+            overflow-y: auto;
+            box-shadow: 0 0 15px cyan;
+            padding: 15px;
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+
+        .search-bar, .dropdown, .input-number {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            box-shadow: 0 0 15px cyan;
+            background: #1a1a1a;
             color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-size: 16px;
-            text-decoration: none;
-            box-shadow: 0 0 10px gray;
-            max-width: 100%;
+            font-size: 18px;
         }
-
     </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <h2>Login with Discord</h2>
-        <a href="https://discord.com/oauth2/authorize?client_id=1345207651503702086&redirect_uri=https%3A%2F%2Fbvmdph6r-8080.usw3.devtunnels.ms%2Fcallback&response_type=code&scope=identify" class="discord-btn">
-            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord"> Login with Discord
-        </a>                
-        <a href="/" class="back-btn" id="back-btn">Back to Home</a>
+    <div class="admin-panel">
+        <h2>Admin Panel</h2>
+        <button class="button" onclick="showVerifiedUsers()">Verified Members</button>
+        <button class="button">Whitelist</button>
+        <button class="button">Blacklist</button>
+
+        <input type="text" class="search-bar" placeholder="Search Usernames..." oninput="searchUsernames()">
+        <div class="user-list" id="userList"></div>
+
+        <button class="button" onclick="showMemberPullMenu()">Pull Members</button>
+        <select class="dropdown" id="serverSelect">
+            <option value="Server1">Server 1</option>
+            <option value="Server2">Server 2</option>
+        </select>
+        <input type="number" class="input-number" placeholder="Number of Members" id="memberCount">
     </div>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has("logged_in")) {
-            document.getElementById("login-btn").style.display = "none";
-            document.getElementById("back-btn").style.display = "block";
+        const usernames = ['User1', 'User2', 'User3'];
+
+        function showVerifiedUsers() {
+            const userList = document.getElementById('userList');
+            userList.innerHTML = '';
+            usernames.forEach((user, index) => {
+                const userItem = document.createElement('div');
+                userItem.textContent = `${index + 1}. ${user}`;
+                userList.appendChild(userItem);
+            });
         }
+
+        function searchUsernames() {
+            const searchValue = document.querySelector('.search-bar').value.toLowerCase();
+            const filteredUsernames = usernames.filter(user => user.toLowerCase().includes(searchValue));
+            const userList = document.getElementById('userList');
+            userList.innerHTML = '';
+            filteredUsernames.forEach((user, index) => {
+                const userItem = document.createElement('div');
+                userItem.textContent = `${index + 1}. ${user}`;
+                userList.appendChild(userItem);
+            });
+        }
+
+        function showMemberPullMenu() {
+            alert('Pull Members Menu Triggered');
+        }
+
     </script>
 
 </body>
